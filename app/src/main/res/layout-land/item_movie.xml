@@ -24,7 +24,7 @@
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@+id/ivPoster"
         android:textSize="24sp"
-        tools:text="furisou " />
+        tools:text="djfjdsfjdjfjn" />
 
     <TextView
         android:id="@+id/tvOverview"
@@ -34,5 +34,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
-        tools:text=" ssfd is dajfdkf a dsaf fdssssssssssssssssssss" />
+        tools:text="djfjdsfjdjfj n is  ashakjkjn" />
+
+
 </RelativeLayout>

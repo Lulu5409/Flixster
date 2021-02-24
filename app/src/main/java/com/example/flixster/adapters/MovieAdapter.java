@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,8 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import com.example.flixster.DetailActivity;
 import com.example.flixster.R;
+
 import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;
@@ -33,27 +36,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         this.context = context;
         this.movies = movies;
     }
-
-    // involves inflating a layout from XML and returning the holder
+    //involves inflating a layout from XML and returning the holder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("MovieAdapter", "onCreateViewHolder");
-        View movieView=LayoutInflater.from(context).inflate(R.layout.item_movie,parent,false);
+        View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie,parent,false);
         return new ViewHolder(movieView);
     }
-
-    // Involves populating data into item through holder
-
+    //involves populating data into the item through holder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("MovieAdapter", "onBindViewHolder"+position);
-        Movie movie=movies.get(position);
+        Movie movie = movies.get(position);
         holder.bind(movie);
 
     }
-
-    // Returns the total count of item in the list
+    //returns the total count of the item in the list
     @Override
     public int getItemCount() {
         return movies.size();
@@ -62,16 +61,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         RelativeLayout container;
+
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivPoster;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle=itemView.findViewById(R.id.tvTitle);
-            tvOverview=itemView.findViewById(R.id.tvOverview);
-            ivPoster=itemView.findViewById(R.id.ivPoster);
-            container=itemView.findViewById(R.id.container);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvOverview = itemView.findViewById(R.id.tvOverview);
+            ivPoster = itemView.findViewById(R.id.ivPoster);
+            container = itemView.findViewById(R.id.container);
         }
 
         public void bind(Movie movie) {
@@ -80,23 +80,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             String imageUrl;
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
                 imageUrl=movie.getBackdropPath();
-            }
-            else{
+            }else{
                 imageUrl=movie.getPosterPath();
             }
-            Glide.with(context).load(imageUrl).into(ivPoster);
 
-            // 1. register click listener on the whole row
-            // 2. navigate to a new activity
+            Glide.with(context).load(imageUrl).into(ivPoster);
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i=new Intent(context, DetailActivity.class);
+                    Intent i = new Intent(context, DetailActivity.class);
                     i.putExtra("movie", Parcels.wrap(movie));
                     context.startActivity(i);
-
                 }
             });
+
         }
     }
 }
